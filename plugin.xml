@@ -101,11 +101,18 @@
 
         <header-file src="src/ios/FabricPlugin.h" />
         <source-file src="src/ios/FabricPlugin.m" />
-
+        <resource-file src="libs/ios/DigitsKitResources.bundle" />
         <framework src="libs/ios/Crashlytics.framework" custom="true" />
         <framework src="libs/ios/Fabric.framework" custom="true" />
+        <framework src="libs/ios/TwitterCore.framework" custom="true" />
+        <framework src="libs/ios/DigitsKit.framework" custom="true" />
         <framework src="Security.framework" />
         <framework src="SystemConfiguration.framework" />
+        <framework src="CoreData.framework" />
+        <framework src="SafariServices.framework" />
+        <framework src="Accounts.framework" />
+        <framework src="Foundation.framework" />
+        <framework src="AddressBook.framework" />
         <framework src="libz.dylib" />
         <framework src="libc++.dylib" />
     </platform>
