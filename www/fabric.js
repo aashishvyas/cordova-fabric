@@ -1,9 +1,43 @@
-"use strict";
-
 var exec = require('cordova/exec');
+
+var getPromisedCordovaExec = function (command, success, fail, arguments) {
+  var toReturn, deferred, injector, $q;
+  if (!success || success === undefined) {
+    if (window.jQuery) {
+      deferred = jQuery.Deferred();
+      success = deferred.resolve;
+      fail = deferred.reject;
+      toReturn = deferred;
+    } else if (window.angular) {
+      injector = angular.injector(["ng"]);
+      $q = injector.get("$q");
+      deferred = $q.defer();
+      success = deferred.resolve;
+      fail = deferred.reject;
+      toReturn = deferred.promise;
+    } else if (window.Promise) {
+      toReturn = new Promise(function(c, e) {
+        success = c;
+        fail = e;
+      });
+    } else if (window.WinJS && window.WinJS.Promise) {
+      toReturn = new WinJS.Promise(function(c, e) {
+        success = c;
+        fail = e;
+      });
+    } else {
+      return console.error('Fabric either needs a success callback, or jQuery/AngularJS/Promise/WinJS.Promise defined for using promises');
+    }
+  }
+
+  cordova.exec(success, fail, "Fabric", command, arguments);
+
+  return toReturn;
+};
 
 var Fabric = function() {
   this.crashlytics = new Crashlytics();
+  this.digits = new Digits();
 }
 
 var Crashlytics = function() {
@@ -13,23 +47,12 @@ var Crashlytics = function() {
     'setUserName', 'crash'
   ];
 
-  var execCall;
-  var rippleMock = (window.parent && window.parent.ripple);
-  if(rippleMock) {
-    console.warn("navigator.fabric.crashlytics not defined : considering you're in dev mode and mocking it !");
-    execCall = function(methodName, args){ console.log("[Fabric] Call to " + methodName + "("+Array.prototype.join.apply(args, [", "])+")"); }
-  } else {
-    execCall = function(methodName, args){ exec(null, null, "Fabric", methodName, args); };
-  }
-
   var self = this;
-  for(var i=0; i<methods.length; i++) {
-    // Wrapping the callback definition call into a temporary function, otherwise i will always
-    // be set to methods.length when calling execCall()
-    (function(idx){
-      var currentMethod = methods[idx];
-      self[currentMethod] = function(){
-        execCall(currentMethod,  Array.prototype.slice.call(arguments));
+  for(var i = 0; i < methods.length; i++) {
+    (function(index){
+      var currentMethod = methods[index];
+      self[currentMethod] = function(success, fail){
+        return getPromisedCordovaExec(currentMethod, null, null, Array.prototype.slice.call(arguments));
       };
     })(i);
   }
@@ -43,6 +66,15 @@ var Crashlytics = function() {
     ASSERT: 7
   };
 };
+
+var Digits = function() {
+  this.logIn = function(options) {
+    return getPromisedCordovaExec('logIn', null, null, [options]);
+  };
+  this.logOut = function() {
+    return getPromisedCordovaExec('logOut');
+  }
+}
 
 var fabric = new Fabric();
 
