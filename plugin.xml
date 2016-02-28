@@ -21,11 +21,11 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
       xmlns:android="http://schemas.android.com/apk/res/android"
       id="co.flocode.cordova.fabric"
-      version="0.0.1">
+      version="1.0.0">
     <name>Fabric</name>
     <description>Cordova Fabric Plugin</description>
     <license>Apache 2.0</license>
-    <keywords>cordova,fabric</keywords>
+    <keywords>cordova,fabric,crashlytics,digits,twitter</keywords>
 
     <engines>
         <engine name="cordova-android" version=">=3.7.0" />
