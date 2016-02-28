@@ -12,6 +12,8 @@ module.exports = {
         var fabricProperties = '';
         fabricProperties += 'apiKey=' + pluginConfig.apiKey + '\n';
         fabricProperties += 'apiSecret=' + pluginConfig.apiSecret + '\n';
+        fabricProperties += 'digitsKey=' + pluginConfig.digitsKey + '\n';
+        fabricProperties += 'digitsSecret=' + pluginConfig.digitsSecret + '\n';
 
         fs.writeFileSync(fabricPropertiesPath, fabricProperties);
     },

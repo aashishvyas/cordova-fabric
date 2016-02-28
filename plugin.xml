@@ -34,6 +34,8 @@
 
     <preference name="FABRIC_API_KEY" />
     <preference name="FABRIC_API_SECRET" />
+    <preference name="DIGITS_KEY" />
+    <preference name="DIGITS_SECRET" />
 
     <js-module src="www/fabric.js" name="Fabric">
         <clobbers target="navigator.fabric" />
@@ -81,6 +83,17 @@
                 <dict/>
                 <key>KitName</key>
                 <string>Crashlytics</string>
+              </dict>
+              <dict>
+                <key>KitInfo</key>
+                <dict>
+                  <key>consumerKey</key>
+                  <string>$DIGITS_KEY</string>
+                  <key>consumerSecret</key>
+                  <string>$DIGITS_SECRET</string>
+                </dict>
+                <key>KitName</key>
+                <string>Digits</string>
               </dict>
             </array>
           </dict>
