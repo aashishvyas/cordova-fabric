@@ -109,6 +109,7 @@ public class FabricPlugin extends CordovaPlugin {
 
   public void logOut(JSONArray args, final CallbackContext callbackContext) {
     Digits.getSessionManager().clearActiveSession();
+    callbackContext.success();
   }
 
   public void logException(JSONArray args, final CallbackContext callbackContext) {
