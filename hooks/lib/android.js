@@ -52,7 +52,7 @@ module.exports = {
                         '   compile(\'com.crashlytics.sdk.android:crashlytics:2.5.5@aar\') {\n' +
                         '     transitive = true\n' +
                         '   }\n' +
-                        '   compile(\'com.crashlytics.sdk.android:digits:1.9.4@aar\') {\n' +
+                        '   compile(\'com.digits.sdk.android:digits:1.9.4@aar\') {\n' +
                         '     transitive = true\n' +
                         '   }\n' +
                         '}\n' +
