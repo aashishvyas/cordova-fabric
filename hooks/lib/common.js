@@ -7,8 +7,8 @@ module.exports = {
         return {
             apiKey: pluginConfig.installed_plugins['co.flocode.cordova.fabric'].FABRIC_API_KEY,
             apiSecret: pluginConfig.installed_plugins['co.flocode.cordova.fabric'].FABRIC_API_SECRET,
-            digitsKey: pluginConfig.installed_plugins['co.flocode.cordova.fabric'].DIGITS_KEY,
-            digitsSecret: pluginConfig.installed_plugins['co.flocode.cordova.fabric'].DIGITS_SECRET,
+            digitsKey: pluginConfig.installed_plugins['co.flocode.cordova.fabric'].DIGITS_CONSUMER_KEY,
+            digitsSecret: pluginConfig.installed_plugins['co.flocode.cordova.fabric'].DIGITS_CONSUMER_SECRET,
         };
     }
 };
