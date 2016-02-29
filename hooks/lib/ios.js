@@ -1,11 +1,19 @@
 var fs = require('fs');
 var path = require('path');
 
-var common = require('./common');
-
 module.exports = {
+    getPluginConfig: function(platform) {
+        var pluginConfig = require(path.join('..', '..', '..', platform + '.json'));
+
+        return {
+            apiKey: pluginConfig.installed_plugins['co.flocode.cordova.fabric'].FABRIC_API_KEY,
+            apiSecret: pluginConfig.installed_plugins['co.flocode.cordova.fabric'].FABRIC_API_SECRET,
+            digitsKey: pluginConfig.installed_plugins['co.flocode.cordova.fabric'].DIGITS_KEY,
+            digitsSecret: pluginConfig.installed_plugins['co.flocode.cordova.fabric'].DIGITS_SECRET,
+        };
+    },
     addShellScriptBuildPhase: function(context, xcodeProjectPath) {
-        var pluginConfig = common.getPluginConfig('ios');
+        var pluginConfig = getPluginConfig('ios');
 
         return this._editXcodeProject(context, xcodeProjectPath, function(xcodeProject, callback) {
             var id = xcodeProject.generateUuid();
