@@ -1,13 +1,21 @@
 package co.flocode.cordova.fabric;
 
-import android.content.Context;
-
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaWebView;
+
+import java.util.*;
+import android.util.Log;
+import android.os.Bundle;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import javax.security.auth.callback.Callback;
+import org.json.JSONObject;
 
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterAuthToken;
