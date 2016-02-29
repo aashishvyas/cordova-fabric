@@ -40,7 +40,16 @@ Plugin provides a `window.plugins.fabric.crashlytics` object with following meth
 ## Digits
 
 Plugin provides a `window.plugins.fabric.digits` object with the following methods:
-- `logIn(options)` : Takes an object literal `options` for customizing the Digits login UI. Options:
+- `authenticate` : Takes an object literal `options` for customizing the Digits login UI. See theming.
+- `logOut`
+
+### Theming
+
+#### iOS
+
+You can call `authenticate` with an object literal as the first argument. The object can have the following values:
+
+Options:
   - `backgroundColor` - Takes a string hex color value. *Do not include the "#"*
   - `accentColor` - Takes a string hex color value. *Do not include the "#"*
   - `headerFont` - Takes a string font name. This is the name as recognized by iOS. It is not necessarily the same as the name of the font resource that you added to the project. Learn about adding fonts to iOS [here](http://codewithchris.com/common-mistakes-with-adding-custom-fonts-to-your-ios-app/).
@@ -51,7 +60,11 @@ Plugin provides a `window.plugins.fabric.digits` object with the following metho
   - `bodyFontSize` - Number representing the font size
   - `logoImage` - Takes a string representing the name of the image resource you want to use. I suggest putting the logo you want in `www/img` and then setting this value to `www/img/my-logo.png`.
 
-### AngularJS integration (For use with Ionic framework)
+#### Android
+
+You must create a resource file at `res/values/my-theme.xml`. The file name itself doesn't matter. However, the `<style>` name must be "CustomDigitsTheme". See [Digits Theming guide](https://docs.fabric.io/android/digits/theming.html#customizing-the-theme) for more info on possible values.
+
+## AngularJS integration (For use with Ionic framework)
 
 Use the following snippet to integrate the plugin in your AngularJS app gracefully :
 
