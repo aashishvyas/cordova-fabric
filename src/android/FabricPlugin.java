@@ -180,7 +180,7 @@ public class FabricPlugin extends CordovaPlugin {
   }
 
   public void setString(JSONArray args, final CallbackContext callbackContext) {
-    try
+    try {
       Crashlytics.getInstance().core.setString(args.getString(0), args.getString(1));
       callbackContext.success();
     } catch (Exception exception) {
