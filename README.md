@@ -1,7 +1,7 @@
 # co.flocode.cordova.fabric
 
 This plugin provides a bridge between javascript error handling and [Fabric](https://www.fabric.io/) server-side
-client API. It is based heavily on the initial work done by [smistry-toushay](https://github.com/smistry-toushay/cordova-crashlytics-plugin) and [4sh-projects](https://github.com/4sh-projects/cordova-crashlytics-plugin).
+client API. It is based heavily on the initial work done by [smistry-toushay](https://github.com/smistry-toushay/cordova-crashlytics-plugin), [4sh-projects](https://github.com/4sh-projects/cordova-crashlytics-plugin), and [JimmyMakesThings](https://github.com/JimmyMakesThings/cordova-plugin-digits).
 
 ## Installation
 
