@@ -107,7 +107,7 @@
     <framework src="libz.dylib" />
     <framework src="libc++.dylib" />
 
-    <resource-file src="libs/ios/DigitsKit.framework/Versions/Current/DigitsKitResources.bundle" />
+    <resource-file src="libs/ios/DigitsKit.framework/Versions/Current/Resources/DigitsKitResources.bundle" />
   </platform>
 
   <hook type="after_plugin_install" src="hooks/after_plugin_install.js" />
