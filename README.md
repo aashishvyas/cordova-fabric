@@ -9,8 +9,8 @@ client API. It is based heavily on the initial work done by [smistry-toushay](ht
 cordova plugin add https://github.com/lookitsatravis/cordova-fabric \
   --variable FABRIC_API_SECRET=<YOUR FABRIC API SECRET HERE>
   --variable FABRIC_API_KEY=<YOUR FABRIC API KEY HERE> \
-  --variable DIGITS_KEY=<YOUR DIGITS API KEY HERE> \
-  --variable DIGITS_SECRET=<YOUR DIGITS SECRET KEY HERE>
+  --variable DIGITS_CONSUMER_KEY=<YOUR DIGITS API KEY HERE> \
+  --variable DIGITS_CONSUMER_SECRET=<YOUR DIGITS SECRET KEY HERE>
 ```
 
 ## Features
