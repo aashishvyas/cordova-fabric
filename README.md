@@ -22,7 +22,7 @@ cordova plugin add https://github.com/lookitsatravis/cordova-fabric \
 
 ## Crashlytics
 
-Plugin provides a `navigator.fabric.crashlytics` object with following methods:
+Plugin provides a `window.plugins.fabric.crashlytics` object with following methods:
 - `logException(string)` : Sends an exception (non fatal) to the Crashlytics backend
 - `log(string)` : Sends a standard log message (non fatal) to the Crashlytics backend
 - `log(errorLevel, tag, msg)` (Android only)
@@ -39,7 +39,7 @@ Plugin provides a `navigator.fabric.crashlytics` object with following methods:
 
 ## Digits
 
-Plugin provides a `navigator.fabric.digits` object with the following methods:
+Plugin provides a `window.plugins.fabric.digits` object with the following methods:
 - `logIn(options)` : Takes an object literal `options` for customizing the Digits login UI. Options:
   - `backgroundColor` - Takes a string hex color value. *Do not include the "#"*
   - `accentColor` - Takes a string hex color value. *Do not include the "#"*
@@ -71,12 +71,12 @@ module.config(['$provide', function($provide) {
         var stacktrace = $window.printStackTrace({e: exception});
         var errorMessage = "ERROR: " + message + ", stacktrace: " + stacktrace;
 
-        navigator.fabric.crashlytics.logException(errorMessage);
+        window.plugins.fabric.crashlytics.logException(errorMessage);
 
         // You may also want to crash the app because of a JS error. This is because
         // logException on iOS does not cause a crash, and so the error is not
         // sent to Fabric.
-        navigator.fabric.crashlytics.crash();
+        window.plugins.fabric.crashlytics.crash();
       }
     };
   }]);
