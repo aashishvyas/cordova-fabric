@@ -41,29 +41,29 @@ public class FabricPlugin extends CordovaPlugin {
     } else if ("logOut".equals(action)) {
       logOut(args, callbackContext);
     } else if ("logException".equals(action)) {
-      logException(args, callbackContext)
+      logException(args, callbackContext);
     }  else if ("log".equals(action)) {
-      log(args, callbackContext)
+      log(args, callbackContext);
     }  else if ("setBool".equals(action)) {
-      setBool(args, callbackContext)
+      setBool(args, callbackContext);
     }  else if ("setDouble".equals(action)) {
-      setDouble(args, callbackContext)
+      setDouble(args, callbackContext);
     }  else if ("setFloat".equals(action)) {
-      setFloat(args, callbackContext)
+      setFloat(args, callbackContext);
     }  else if ("setInt".equals(action)) {
-      setInt(args, callbackContext)
+      setInt(args, callbackContext);
     }  else if ("setLong".equals(action)) {
-      setLong(args, callbackContext)
+      setLong(args, callbackContext);
     } else if ("setString".equals(action)) {
-      setString(args, callbackContext)
+      setString(args, callbackContext);
     } else if ("setUserEmail".equals(action)) {
-      setUserEmail(args, callbackContext)
+      setUserEmail(args, callbackContext);
     } else if ("setUserIdentifier".equals(action)) {
-      setUserIdentifier(args, callbackContext)
+      setUserIdentifier(args, callbackContext);
     } else if ("setUserName".equals(action)) {
-      setUserName(args, callbackContext)
+      setUserName(args, callbackContext);
     } else if ("crash".equals(action)) {
-      crash(args, callbackContext)
+      crash(args, callbackContext);
     } else {
       Log.w(TAG, "unknown action `" + action + "`");
       return false;
