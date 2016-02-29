@@ -179,11 +179,16 @@ public class FabricPlugin extends CordovaPlugin {
     }
   }
 
-  public void setString(JSONArray args, final CallbackContext callbackContext){
-    Crashlytics.getInstance().core.setString(args.getString(0), args.getString(1));
+  public void setString(JSONArray args, final CallbackContext callbackContext) {
+    try
+      Crashlytics.getInstance().core.setString(args.getString(0), args.getString(1));
+      callbackContext.success();
+    } catch (Exception exception) {
+      callbackContext.error(exception.getMessage());
+    }
   }
 
-  public void setUserEmail(JSONArray args, final CallbackContext callbackContext){
+  public void setUserEmail(JSONArray args, final CallbackContext callbackContext) {
     try {
       Crashlytics.getInstance().core.setUserEmail(args.getString(0));
       callbackContext.success();
@@ -192,7 +197,7 @@ public class FabricPlugin extends CordovaPlugin {
     }
   }
 
-  public void setUserIdentifier(JSONArray args, final CallbackContext callbackContext){
+  public void setUserIdentifier(JSONArray args, final CallbackContext callbackContext) {
     try {
       Crashlytics.getInstance().core.setUserIdentifier(args.getString(0));
       callbackContext.success();
@@ -201,7 +206,7 @@ public class FabricPlugin extends CordovaPlugin {
     }
   }
 
-  public void setUserName(JSONArray args, final CallbackContext callbackContext){
+  public void setUserName(JSONArray args, final CallbackContext callbackContext) {
     try {
       Crashlytics.getInstance().core.setUserName(args.getString(0));
       callbackContext.success();
@@ -210,7 +215,7 @@ public class FabricPlugin extends CordovaPlugin {
     }
   }
 
-  public void crash(JSONArray args, final CallbackContext callbackContext){
+  public void crash(JSONArray args, final CallbackContext callbackContext) throws JSONException {
     String message = args.length() == 0 ? "Crashing from Cordova" : args.getString(0);
     throw new RuntimeException(message);
   }
