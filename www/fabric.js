@@ -72,7 +72,7 @@ var Digits = function() {
     return getPromisedCordovaExec('authenticate', null, null, [options]);
   };
   this.logOut = function() {
-    return getPromisedCordovaExec('logOut');
+    return getPromisedCordovaExec('logOut', null, null, []);
   }
 }
 
