@@ -104,6 +104,7 @@
     <framework src="Accounts.framework" />
     <framework src="Foundation.framework" />
     <framework src="AddressBook.framework" />
+    <framework src="Social.framework" />
     <framework src="libz.dylib" />
     <framework src="libc++.dylib" />
 
