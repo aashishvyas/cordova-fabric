@@ -1,122 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Licensed to the Apache Software Foundation (ASF) under one
-  or more contributor license agreements.  See the NOTICE file
-  distributed with this work for additional information
-  regarding copyright ownership.  The ASF licenses this file
-  to you under the Apache License, Version 2.0 (the
-  "License"); you may not use this file except in compliance
-  with the License.  You may obtain a copy of the License at
+<plugin
+  xmlns="http://apache.org/cordova/ns/plugins/1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  id="co.flocode.cordova.fabric"
+  version="1.0.0">
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  <name>Fabric</name>
+  <description>Cordova Fabric Plugin with Crashlytics and Digits support (iOS and Android)</description>
+  <license>MIT</license>
+  <keywords>cordova,fabric,fabric.io,crashlytics,digits,twitter</keywords>
+  <repo>https://github.com/lookitsatravis/cordova-fabric</repo>
+  <issue>travis@lookitsatravis.com</issue>
 
-  Unless required by applicable law or agreed to in writing,
-  software distributed under the License is distributed on an
-  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-  KIND, either express or implied.  See the License for the
-  specific language governing permissions and limitations
-  under the License.
--->
+  <engines>
+    <engine name="cordova-android" version=">=3.7.0" />
+    <engine name="cordova-ios" version=">=3.8.0" />
+  </engines>
 
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-      xmlns:android="http://schemas.android.com/apk/res/android"
-      id="co.flocode.cordova.fabric"
-      version="1.0.0">
-    <name>Fabric</name>
-    <description>Cordova Fabric Plugin</description>
-    <license>Apache 2.0</license>
-    <keywords>cordova,fabric,crashlytics,digits,twitter</keywords>
+  <preference name="FABRIC_API_KEY" />
+  <preference name="FABRIC_API_SECRET" />
+  <preference name="DIGITS_CONSUMER_KEY" />
+  <preference name="DIGITS_CONSUMER_SECRET" />
 
-    <engines>
-        <engine name="cordova-android" version=">=3.7.0" />
-        <engine name="cordova-ios" version=">=3.8.0" />
-    </engines>
+  <js-module src="www/fabric.js" name="Fabric">
+    <clobbers target="window.plugins.fabric" />
+  </js-module>
 
-    <preference name="FABRIC_API_KEY" />
-    <preference name="FABRIC_API_SECRET" />
-    <preference name="DIGITS_KEY" />
-    <preference name="DIGITS_SECRET" />
+  <!-- android -->
+  <platform name="android">
+    <framework src="src/android/fabric.gradle" custom="true" type="gradleReference" />
 
-    <js-module src="www/fabric.js" name="Fabric">
-        <clobbers target="navigator.fabric" />
-    </js-module>
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="Fabric" >
+        <param name="android-package" value="co.flocode.cordova.fabric.FabricPlugin"/>
+        <param name="onload" value="true" />
+      </feature>
+    </config-file>
 
-    <!-- android -->
-    <platform name="android">
-        <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="Fabric" >
-                <param name="android-package" value="co.flocode.cordova.fabric.FabricPlugin"/>
-                <param name="onload" value="true" />
-            </feature>
-        </config-file>
+    <config-file target="AndroidManifest.xml" parent="/*">
+      <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+      <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+      <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    </config-file>
 
-        <config-file target="AndroidManifest.xml" parent="/*">
-            <uses-permission android:name="android.permission.INTERNET" />
-        </config-file>
+    <config-file target="AndroidManifest.xml" parent="application">
+      <meta-data android:name="io.fabric.ApiKey" android:value="$FABRIC_API_KEY"/>
+      <meta-data android:name="io.fabric.digits.ConsumerKey" android:value="$DIGITS_CONSUMER_KEY"/>
+      <meta-data android:name="io.fabric.digits.ConsumerSecret" android:value="$DIGITS_CONSUMER_SECRET"/>
+    </config-file>
 
-        <config-file target="AndroidManifest.xml" parent="application">
-            <meta-data android:name="com.fabric.ApiKey" android:value="$FABRIC_API_KEY"/>
-        </config-file>
+    <source-file src="src/android/FabricPlugin.java" target-dir="src/co/flocode/cordova/fabric" />
+  </platform>
 
-        <source-file src="src/android/co/flocode/cordova/fabric/FabricPlugin.java" target-dir="src/co/flocode/cordova/fabric" />
-    </platform>
+  <!-- ios -->
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="Fabric">
+          <param name="ios-package" value="FabricPlugin"/>
+          <param name="onload" value="true"/>
+      </feature>
+    </config-file>
 
-    <!-- ios -->
-    <platform name="ios">
-        <config-file target="config.xml" parent="/*">
-          <feature name="Fabric">
-              <param name="ios-package" value="FabricPlugin"/>
-              <param name="onload" value="true"/>
-          </feature>
+    <header-file src="src/ios/FabricPlugin.h" />
+    <source-file src="src/ios/FabricPlugin.m" />
 
-          <preference name="FABRIC_API_KEY" value="$FABRIC_API_KEY"/>
-        </config-file>
-
-        <config-file target="*-Info.plist" parent="Fabric">
+    <config-file target="*-Info.plist" parent="Fabric">
+      <dict>
+        <key>APIKey</key>
+        <string>$FABRIC_API_KEY</string>
+        <key>Kits</key>
+        <array>
           <dict>
-            <key>APIKey</key>
-            <string>$FABRIC_API_KEY</string>
-            <key>Kits</key>
-            <array>
-              <dict>
-                <key>KitInfo</key>
-                <dict/>
-                <key>KitName</key>
-                <string>Crashlytics</string>
-              </dict>
-              <dict>
-                <key>KitInfo</key>
-                <dict>
-                  <key>consumerKey</key>
-                  <string>$DIGITS_KEY</string>
-                  <key>consumerSecret</key>
-                  <string>$DIGITS_SECRET</string>
-                </dict>
-                <key>KitName</key>
-                <string>Digits</string>
-              </dict>
-            </array>
+            <key>KitInfo</key>
+            <dict/>
+            <key>KitName</key>
+            <string>Crashlytics</string>
           </dict>
-        </config-file>
+          <dict>
+            <key>KitInfo</key>
+            <dict>
+              <key>consumerKey</key>
+              <string>$DIGITS_CONSUMER_KEY</string>
+              <key>consumerSecret</key>
+              <string>$DIGITS_CONSUMER_SECRET</string>
+            </dict>
+            <key>KitName</key>
+            <string>Digits</string>
+          </dict>
+        </array>
+      </dict>
+    </config-file>
 
-        <header-file src="src/ios/FabricPlugin.h" />
-        <source-file src="src/ios/FabricPlugin.m" />
-        <resource-file src="libs/ios/DigitsKitResources.bundle" />
-        <framework src="libs/ios/Crashlytics.framework" custom="true" />
-        <framework src="libs/ios/Fabric.framework" custom="true" />
-        <framework src="libs/ios/TwitterCore.framework" custom="true" />
-        <framework src="libs/ios/DigitsKit.framework" custom="true" />
-        <framework src="Security.framework" />
-        <framework src="SystemConfiguration.framework" />
-        <framework src="CoreData.framework" />
-        <framework src="SafariServices.framework" />
-        <framework src="Accounts.framework" />
-        <framework src="Foundation.framework" />
-        <framework src="AddressBook.framework" />
-        <framework src="libz.dylib" />
-        <framework src="libc++.dylib" />
-    </platform>
+    <framework src="libs/ios/Crashlytics.framework" custom="true" />
+    <framework src="libs/ios/Fabric.framework" custom="true" />
+    <framework src="libs/ios/TwitterCore.framework" custom="true" />
+    <framework src="libs/ios/DigitsKit.framework" custom="true" />
 
-    <hook type="after_plugin_install" src="hooks/after_plugin_install.js" />
-    <hook type="before_plugin_uninstall" src="hooks/before_plugin_uninstall.js" />
+    <framework src="Security.framework" />
+    <framework src="SystemConfiguration.framework" />
+    <framework src="CoreData.framework" />
+    <framework src="SafariServices.framework" />
+    <framework src="Accounts.framework" />
+    <framework src="Foundation.framework" />
+    <framework src="AddressBook.framework" />
+    <framework src="libz.dylib" />
+    <framework src="libc++.dylib" />
+
+    <resource-file src="libs/ios/DigitsKit.framework/Versions/Current/DigitsKitResources.bundle" />
+  </platform>
+
+  <hook type="after_plugin_install" src="hooks/after_plugin_install.js" />
+  <hook type="before_plugin_uninstall" src="hooks/before_plugin_uninstall.js" />
 </plugin>
