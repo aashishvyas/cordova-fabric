@@ -68,8 +68,8 @@ var Crashlytics = function() {
 };
 
 var Digits = function() {
-  this.logIn = function(options) {
-    return getPromisedCordovaExec('logIn', null, null, [options]);
+  this.authenticate = function(options) {
+    return getPromisedCordovaExec('authenticate', null, null, [options]);
   };
   this.logOut = function() {
     return getPromisedCordovaExec('logOut');
