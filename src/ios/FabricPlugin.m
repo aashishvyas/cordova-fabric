@@ -106,8 +106,8 @@
     [self.commandDelegate sendPluginResult:res callbackId:command.callbackId];
 }
 
-- (void)logIn:(CDVInvokedUrlCommand *)command {
-    NSLog(@"FabricPlugin: Starting Digits log in...");
+- (void)authenticate:(CDVInvokedUrlCommand *)command {
+    NSLog(@"FabricPlugin: Starting Digits authenticate...");
 
     NSDictionary *options = [command argumentAtIndex:0];
 
@@ -142,11 +142,11 @@
     [[Digits sharedInstance] authenticateWithViewController:nil configuration:configuration completion:^(DGTSession *session, NSError *error) {
 
         if(error) {
-            NSLog(@"FabricPlugin: Digits log in error!");
+            NSLog(@"FabricPlugin: Digits authenticate error!");
             CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
         } else {
-            NSLog(@"FabricPlugin: Digits log in success!");
+            NSLog(@"FabricPlugin: Digits authenticate success!");
             DGTOAuthSigning *oauthSigning = [[DGTOAuthSigning alloc] initWithAuthConfig:digits.authConfig authSession:digits.session];
             NSMutableDictionary *results = [NSMutableDictionary dictionary];
             NSDictionary *authHeaders = [oauthSigning OAuthEchoHeadersToVerifyCredentials];
